@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import Container from "../components/Container";
+import Breadcrumb from "../components/Breadcrumb";
 
 const SalePage = () => {
   return (
-    <div>SalePage</div>
-  )
-}
+    <section>
+      <Container>
+        <Breadcrumb currentPageTitle={"Sale Module"} />
+      </Container>
+    </section>
+  );
+};
 
-export default SalePage
+export default SalePage;

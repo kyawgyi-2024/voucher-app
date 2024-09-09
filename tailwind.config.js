@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}","./node_modules/flowbite/**/*.js",
   ],
   theme: {
+    fontFamily: {
+      sans: ['"Montserrat"',"Padauk", 'sans-serif'],
+    },
     extend: {},
   },
   plugins: [

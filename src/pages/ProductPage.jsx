@@ -1,8 +1,17 @@
 import React from 'react'
+import Container from '../components/Container'
+import Breadcrumb from '../components/Breadcrumb'
+import ProductList from './ProductList'
 
 const ProductPage = () => {
   return (
-    <div>ProductPage</div>
+    <section>
+      <Container>
+        <Breadcrumb currentPageTitle={"Product Module"} />
+        
+        <ProductList/>
+      </Container>
+    </section>
   )
 }
 
