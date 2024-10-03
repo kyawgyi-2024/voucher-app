@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 
 const Header = () => {
   return (
-    <header className=' mb-5'>
+    <header className=' mb-2'>
      <Container>
       <Navbar/>
      
