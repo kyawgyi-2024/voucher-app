@@ -1,15 +1,18 @@
 import React from "react";
 import logo from "../assets/mms_it_logo.jpeg";
-import lu from "../assets/lu.jpg"
+import lu from "../assets/lu.jpg";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-[#f5f5f5] border-gray-200 dark:bg-gray-900 shadow-sm h-auto">
+    <nav className="bg-[#f5f5f5] border-gray-200 dark:bg-gray-900 shadow-sm h-auto mb-10">
       <div className="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
         {/* Logo and Title */}
-        <Link to={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link
+          to={"/"}
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <img src={logo} className="h-10 w-10 rounded-lg" alt="MMS Logo" />
           <span className="text-2xl font-semibold text-stone-600 dark:text-white whitespace-nowrap">
             MMS IT
@@ -18,7 +21,11 @@ const Navbar = () => {
 
         {/* User Section */}
         <div className="flex items-center space-x-2 md:order-2 cursor-pointer">
-          <img src={lu} alt="User" className="h-8 w-8 rounded-full object-cover object-bottom cursor-pointer border border-blue-800" />
+          <img
+            src={lu}
+            alt="User"
+            className="h-8 w-8 rounded-full object-cover object-bottom cursor-pointer border border-blue-800"
+          />
           <h6 className="font-medium text-stone-800 text-sm">Lu Lu</h6>
         </div>
       </div>
@@ -35,15 +42,11 @@ const Navbar = () => {
             placeholder="Search ..."
           />
         </div>
-        
       </div>
       {/* Title */}
       {/* <div className="max-w-screen-xl mx-auto">
       </div> */}
       <span className="text-sm font-bold text-stone-600">Voucher App :</span>
-      
-
-      
     </nav>
   );
 };
