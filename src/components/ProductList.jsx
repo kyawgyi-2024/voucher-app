@@ -1,23 +1,50 @@
-import React from "react";
-import { HiOutlineSearch } from "react-icons/hi";
+import React, { useRef, useState } from "react";
+import { HiOutlineSearch,HiX } from "react-icons/hi";
 import { HiPlus } from "react-icons/hi2";
 import ProductListSkeletonLoader from "./ProductListSkeletonLoader";
 import ProductListEmptyStage from "./ProductListEmptyStage";
 import ProductRow from "./ProductRow";
 import { Link } from "react-router-dom";
+import { debounce, throttle } from "lodash";
 
 //swr from fetching data
 import useSWR from "swr";
 
-
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const ProductList = () => {
+  const [search, setSearch] = useState("");
 
+  // input value for taking ref
+
+  const searchInput = useRef("");
+
+  // console.log(searchInput);
+
+  // const { data, isLoading, error } = useSWR(
+  //   import.meta.env.VITE_API_URL + "/products",
+  //   fetcher
+  // );
+
+  //search feature add
 
   const { data, isLoading, error } = useSWR(
-    import.meta.env.VITE_API_URL + "/products",
+    search
+      ? `${import.meta.env.VITE_API_URL}/products?product_name_like=${search}`
+      : `${import.meta.env.VITE_API_URL}/products`,
     fetcher
   );
+
+  // debouncing from lodash
+
+  const handleSearch = debounce((e) => {
+    console.log(e.target.value);
+    setSearch(e.target.value);
+  }, 500);
+
+  const handleClearSearch = () => {
+    setSearch("");
+    searchInput.current.value = "";
+  };
 
   // console.log(import.meta.env.VITE_API_URL);
   return (
@@ -28,14 +55,30 @@ const ProductList = () => {
             <HiOutlineSearch className=" w-4 h-4 text-gray-500" />
           </div>
           <input
+            ref={searchInput}
+            onChange={handleSearch}
             type="text"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search Product ... "
           />
+          {search && (
+            <button
+              className=" absolute top-0 right-2 bottom-0 m-auto"
+              onClick={handleClearSearch}
+            >
+              <HiX
+                fill="red"
+                className="scale-100 active:scale-90 duration-200"
+              />
+            </button>
+          )}
         </div>
 
         <div>
-          <Link to="/product/create" className="text-white flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <Link
+            to="/product/create"
+            className="text-white flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
             <HiPlus className="w-4 h-4" />
             Add New Product
           </Link>
@@ -69,7 +112,9 @@ const ProductList = () => {
             ) : data.length === 0 ? (
               <ProductListEmptyStage />
             ) : (
-              data.map((product) => <ProductRow key={product.id} product={product} />)
+              data.map((product) => (
+                <ProductRow key={product.id} product={product} />
+              ))
             )}
           </tbody>
         </table>

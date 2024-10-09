@@ -20,9 +20,9 @@ const VoucherListRow = ({
     await fetch(import.meta.env.VITE_API_URL + `/vouchers/${id}`, {
       method: "DELETE",
     });
-    toast.success("Voucher Deleted Successfully");
     mutate(import.meta.env.VITE_API_URL + "/vouchers");
-    // setIsDeleting(false);
+    toast.success("Voucher Deleted Successfully");
+    setIsDeleting(false);
 
     // console.log(id);
   };

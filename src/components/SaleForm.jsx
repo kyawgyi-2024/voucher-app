@@ -38,7 +38,7 @@ const SaleForm = () => {
     reset();
   };
   return (
-    <div className=" bg-[#f5f5f5] shadow-md rounded-lg px-8 pt-6 pb-8 mb-5">
+    <div className=" bg-[#f2f2f2] shadow-md rounded-lg px-8 pt-6 pb-8 mb-5">
       <form action="#" id="recordForm" onSubmit={handleSubmit(handleForm)}>
         <div className="grid grid-cols-5 gap-5">
           <div className="col-span-2">
